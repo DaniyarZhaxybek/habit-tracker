@@ -80,11 +80,47 @@ class HomeScreen extends StatelessWidget {
                       habit.isCompleted ? 'Выполнено' : 'Не выполнено',
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete_outline),
-                      onPressed: () {
-                        habitProvider.deleteHabit(habit.id);
-                      },
-                    ),
+  icon: const Icon(Icons.delete_outline),
+  onPressed: () async {
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Удаление'),
+          content: const Text(
+            'Вы уверены, что хотите удалить привычку?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: const Text('Отмена'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text('Удалить'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldDelete == true) {
+      habitProvider.deleteHabit(habit.id);
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Привычка удалена'),
+          ),
+        );
+      }
+    }
+  },
+),
                   ),
                 );
               },
