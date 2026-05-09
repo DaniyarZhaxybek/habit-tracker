@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/habit_provider.dart';
 import 'add_habit_screen.dart';
+import 'about_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,18 +17,29 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
   title: const Text('Мои привычки'),
   actions: [
-    IconButton(
-      icon: const Icon(Icons.bar_chart),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const StatsScreen(),
-          ),
-        );
-      },
-    ),
-  ],
+  IconButton(
+    icon: const Icon(Icons.bar_chart),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const StatsScreen(),
+        ),
+      );
+    },
+  ),
+  IconButton(
+    icon: const Icon(Icons.info),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const AboutScreen(),
+        ),
+      );
+    },
+  ),
+],
 ),
       body: habitProvider.habits.isEmpty
           ? const Center(
