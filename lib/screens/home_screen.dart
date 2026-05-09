@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/stats_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/habit_provider.dart';
@@ -13,8 +14,21 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Мои привычки'),
-      ),
+  title: const Text('Мои привычки'),
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.bar_chart),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const StatsScreen(),
+          ),
+        );
+      },
+    ),
+  ],
+),
       body: habitProvider.habits.isEmpty
           ? const Center(
               child: Text('Пока привычек нет'),
