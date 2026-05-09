@@ -9,11 +9,12 @@ class FirestoreService {
   Future<void> addHabit(String title) async {
     final docRef = habitsCollection.doc();
 
-    final habit = HabitModel(
-      id: docRef.id,
-      title: title,
-      isCompleted: false,
-    );
+   final habit = HabitModel(
+  id: docRef.id,
+  title: title,
+  isCompleted: false,
+  createdAt: DateTime.now(),
+);
 
     await docRef.set(habit.toMap());
   }
@@ -35,4 +36,10 @@ class FirestoreService {
   Future<void> deleteHabit(String id) async {
     await habitsCollection.doc(id).delete();
   }
+  Future<void> updateHabitTitle(String id, String title) async {
+  await habitsCollection.doc(id).update({
+    'title': title,
+  });
 }
+}
+

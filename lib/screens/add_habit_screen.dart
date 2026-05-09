@@ -13,6 +13,7 @@ class AddHabitScreen extends StatefulWidget {
 class _AddHabitScreenState extends State<AddHabitScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -20,21 +21,41 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     super.dispose();
   }
 
-  void _saveHabit() async {
-    if (_formKey.currentState!.validate()) {
+  Future<void> _saveHabit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
       await context.read<HabitProvider>().addHabit(
             _titleController.text.trim(),
           );
 
-      if (mounted) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-      content: Text('Привычка добавлена'),
-    ),
-  );
+      if (!mounted) return;
 
-  Navigator.pop(context);
-}
+      Navigator.pop(context);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Привычка добавлена'),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Ошибка: $e'),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -69,9 +90,14 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 },
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _saveHabit,
-                child: const Text('Сохранить'),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _isLoading ? null : _saveHabit,
+                  child: _isLoading
+                      ? const CircularProgressIndicator()
+                      : const Text('Сохранить'),
+                ),
               ),
             ],
           ),
