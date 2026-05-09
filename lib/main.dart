@@ -30,8 +30,29 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Habit Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+  useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.indigo,
+  ),
+  scaffoldBackgroundColor: const Color(0xFFF5F7FB),
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    elevation: 0,
+    backgroundColor: Color(0xFFF5F7FB),
+    foregroundColor: Colors.black87,
+  ),
+  cardTheme: CardThemeData(
+    elevation: 2,
+    color: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(18),
+    ),
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: Colors.indigo,
+    foregroundColor: Colors.white,
+  ),
+),
       home: const HomeScreen(),
     );
   }
