@@ -27,8 +27,14 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
           );
 
       if (mounted) {
-        Navigator.pop(context);
-      }
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Text('Привычка добавлена'),
+    ),
+  );
+
+  Navigator.pop(context);
+}
     }
   }
 
