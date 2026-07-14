@@ -1,17 +1,17 @@
-# Habit Tracker
+# 📱 Habit Tracker
 
-A mobile application built with Flutter for tracking daily habits.
+A cross-platform mobile application built with Flutter for tracking daily habits and monitoring daily progress.
 
-## Features
+## ✨ Features
 
 - ✅ Create new habits
-- ✅ Edit habits
-- ✅ Delete habits
-- ✅ Mark habits as completed
-- ✅ Local storage using Hive
-- ✅ Material 3 UI
+- ✏️ Edit existing habits
+- 🗑️ Delete habits
+- ✔️ Mark habits as completed
+- 💾 Local data storage with Hive
+- 🎨 Modern Material 3 user interface
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - Flutter
 - Dart
@@ -19,17 +19,41 @@ A mobile application built with Flutter for tracking daily habits.
 - Hive
 - Material 3
 
-## Screenshots
+## 📂 Project Structure
 
-Coming soon...
+```
+lib/
+├── models/
+├── providers/
+├── screens/
+├── widgets/
+└── main.dart
+```
 
-## Getting Started
+## 🚀 Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/DaniyarZhaxybek/habit-tracker.git
+```
+
+Install dependencies
 
 ```bash
 flutter pub get
+```
+
+Run the application
+
+```bash
 flutter run
 ```
 
-## Author
+## 📸 Screenshots
 
-Daniyar Zhaxybekov
+Coming soon...
+
+## 👨‍💻 Author
+
+Daniyar Zhaxybek
